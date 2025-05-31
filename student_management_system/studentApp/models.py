@@ -23,7 +23,7 @@ class Student(models.Model):
 
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
-    age = models.CharField()
+    age = models.IntegerField()
     email = models.EmailField(unique=True,blank=False)
     phone = models.CharField(max_length=15)
     dob = models.DateField()
