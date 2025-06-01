@@ -4,14 +4,14 @@ from django.db import models
 
 class StudentClass(models.Model):
     name = models.CharField(max_length=50) 
-    section = models.CharField(max_length=1, blank=True, null=True) 
+    section = models.CharField(max_length=1, default='A') 
     class_teacher = models.CharField(max_length=100, blank=True)  
-    academic_year = models.CharField(max_length=9) 
+    academic_year = models.CharField(max_length=9, blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} - Section {self.section}"
+        return f"{self.name}-{self.section}"
 
 
 class Student(models.Model):

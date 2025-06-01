@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Student Class</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #ffffff;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333333;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      color: #555555;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      transition: border-color 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: #007BFF;
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 1rem;
+    }
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add Student Class</h2>
+
+    <form method="POST" action="{% url 'add_studentclass' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="hidden" id="id" name="id" value="{{get_class.id}}"><br>
+        <label for="id_name">Class Name</label>
+        <input type="text" id="id_name" name="name" placeholder="e.g. Grade 10" value="{{get_class.name}}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="id_section">Section</label>
+        <select id="id_section" name="section">
+          <option value="" disabled selected>-- Select Class --</option>
+          <option value="A" {% if form.section.value == "A" %}selected{% endif %}>A</option>
+          <option value="B" {% if form.section.value == "B" %}selected{% endif %}>B</option>
+          <option value="C" {% if form.section.value == "C" %}selected{% endif %}>C</option>
+          <option value="D" {% if form.section.value == "D" %}selected{% endif %}>D</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="id_class_teacher">Class Teacher</label>
+        <input type="text" id="id_class_teacher" name="class_teacher" placeholder="e.g. John Doe" value="{{get_class.class_teacher}}" />
+      </div>
+
+      <div class="form-group">
+        <label for="id_academic_year">Academic Year</label>
+        <input
+          type="text"
+          id="id_academic_year"
+          name="academic_year"
+          placeholder="e.g. 2024-2025"
+          value="{{get_class.academic_year}}"
+        />
+      </div>
+
+      <button type="submit" class="submit-btn">Save</button>
+    </form>
+  </div>
+</body>
+</html>
